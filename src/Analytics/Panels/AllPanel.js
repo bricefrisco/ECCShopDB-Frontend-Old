@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Client } from '@stomp/stompjs';
 
 import RealTimeEvent from '../Events/RealTimeEvent';
 import { getAllAnalytics } from '../../API/analytics';
@@ -27,25 +26,6 @@ class RealtimePanel extends React.Component {
         loading: false,
       });
     });
-
-    // const cli = new Client({ brokerURL: process.env.REACT_APP_WS_URL })
-    // cli.onConnect = () => {
-    //     cli.subscribe('/topic/events', (message) => {
-    //         if (this.state.events.length >= 25) {
-    //             this.setState({
-    //                 ...this.state,
-    //                 events: [JSON.parse(message.body), ...this.state.events.slice(0, 24)]
-    //             })
-    //         } else {
-    //             this.setState({
-    //                 ...this.state,
-    //                 events: [JSON.parse(message.body), ...this.state.events]
-    //             })
-    //         }
-    //     })
-    // }
-    //
-    // cli.activate()
   }
 
   render() {

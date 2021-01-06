@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import SortBy from './Panels/SortBy';
-import RealtimePanel from './Panels/RealtimePanel';
+import AllPanel from './Panels/AllPanel';
 import ChestShopsPanel from './Panels/ChestShopsPanel';
 import RegionsPanel from './Panels/RegionsPanel';
 import PlayersPanel from './Panels/PlayersPanel';
@@ -13,7 +13,7 @@ import RegionPanel from './Panels/RegionPanel';
 const Analytics = () => {
   const classes = useStyles();
 
-  const [analyticsType, setAnalyticsType] = useState('realtime');
+  const [analyticsType, setAnalyticsType] = useState('all');
 
   return (
     <div className={classes.background}>
@@ -22,7 +22,7 @@ const Analytics = () => {
           analyticsType={analyticsType}
           setAnalyticsType={(event) => setAnalyticsType(event.target.value)}
         />
-        {analyticsType === 'realtime' && <RealtimePanel />}
+        {analyticsType === 'all' && <AllPanel />}
         {analyticsType === 'chest-shops' && <ChestShopsPanel />}
         {analyticsType === 'regions' && <RegionsPanel />}
         {analyticsType === 'players' && <PlayersPanel />}

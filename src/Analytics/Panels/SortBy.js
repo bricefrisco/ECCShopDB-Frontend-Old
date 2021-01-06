@@ -18,7 +18,7 @@ const SortByOptions = ({ analyticsType, setAnalyticsType }) => {
           value={analyticsType}
           onChange={setAnalyticsType}
         >
-          <MenuItem value='realtime'>Real-time</MenuItem>
+          <MenuItem value='all'>All</MenuItem>
           <MenuItem value='chest-shops'>Chest Shops</MenuItem>
           <MenuItem value='regions'>Regions</MenuItem>
           <MenuItem value='players'>Players</MenuItem>
