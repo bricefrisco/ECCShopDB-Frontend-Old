@@ -23,24 +23,12 @@ jobs:
           version: 19.03.13
 
       - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-
-      - run:
           name: Install dependencies
           command: npm install
 
       - run:
           name: Webpack JS files
           command: CI= npm run build
-
-      - run:
-          name: Build docker image
-          command: docker build -t bricefrisco/eccshopdb-frontend:$CIRCLE_BUILD_NUM .
-
-      - run:
-          name: Push docker image
-          command: docker push bricefrisco/eccshopdb-frontend:$CIRCLE_BUILD_NUM
 
       - run:
           name: Deploy to server
