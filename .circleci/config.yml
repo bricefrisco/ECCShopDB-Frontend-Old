@@ -44,4 +44,4 @@ jobs:
 
       - run:
           name: Deploy to server
-          command: scp -o StrictHostKeyChecking=no $HOST -r target root@$HOST:/var/www/html
+          command: scp -o StrictHostKeyChecking=no $HOST -r build root@$HOST:/var/www/html
