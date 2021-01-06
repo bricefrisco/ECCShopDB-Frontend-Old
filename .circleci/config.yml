@@ -1,13 +1,13 @@
 version: 2.1
 
-# workflows:
-#   version: 2
-#   main:
-#     jobs:
-#       - build:
-#           filters:
-#             branches:
-#               only: master
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
 
 jobs:
   build:
@@ -32,4 +32,4 @@ jobs:
 
       - run:
           name: Deploy to server
-          command: scp -o StrictHostKeyChecking=no -r /home/circleci/application/build root@$HOST:/var/www/html
+          command: scp -o StrictHostKeyChecking=no -r /home/circleci/application/build root@$HOST:/var/www/html/
