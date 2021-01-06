@@ -32,7 +32,7 @@ jobs:
 
       - run:
           name: Webpack JS files
-          command: npm run build
+          command: CI= npm run build
 
       - run:
           name: Build docker image
@@ -44,4 +44,4 @@ jobs:
 
       - run:
           name: Deploy to server
-          command: ssh -o StrictHostKeyChecking=no $HOST "scp -o StrictHostKeyChecking=no -r target root@$HOST:/var/www/html"
+          command: scp -o StrictHostKeyChecking=no $HOST -r target root@$HOST:/var/www/html
