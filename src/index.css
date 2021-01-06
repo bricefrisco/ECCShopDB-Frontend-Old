@@ -14,9 +14,9 @@ code {
 
 .MuiList-root.MuiMenu-list.MuiList-padding {
   background-color: #242526;
-  color: rgba(255, 255, 255, 0.7)
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.Mui-selected.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button.Mui-selected {
-  background-color: #323232
+  background-color: #323232;
 }

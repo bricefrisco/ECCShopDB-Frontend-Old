@@ -1,117 +1,115 @@
-import React, {useEffect, useState} from 'react'
-import {makeStyles} from '@material-ui/core/styles'
-import Container from '@material-ui/core/Container'
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
-import Filters from './Filters/Filters'
-import RegionResults from './Results/RegionResults/RegionResults'
+import Filters from './Filters/Filters';
+import RegionResults from './Results/RegionResults/RegionResults';
 
-import {fetchRegions} from '../../API/regionApi';
+import { fetchRegions } from '../../API/regionApi';
 
 const Regions = () => {
-    const classes = useStyles()
+  const classes = useStyles();
 
-    // Filters
-    const [server, setServer] = useState('all')
-    const [hideDisabledRegions, setHideDisabledRegions] = useState(true)
-    const [name, setName] = useState(null)
+  // Filters
+  const [server, setServer] = useState('all');
+  const [hideDisabledRegions, setHideDisabledRegions] = useState(true);
+  const [name, setName] = useState(null);
 
-    // Results
-    const [loading, setLoading] = useState(false)
-    const [regions, setRegions] = useState(null)
-    const [pagination, setPagination] = useState(undefined)
-    const [page, setPage] = useState(1)
+  // Results
+  const [loading, setLoading] = useState(false);
+  const [regions, setRegions] = useState(null);
+  const [pagination, setPagination] = useState(undefined);
+  const [page, setPage] = useState(1);
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-        setLoading(true)
-        fetchRegions(page, server, hideDisabledRegions, name)
-            .then(({currentPage, totalPages, totalElements, results}) => {
-                setPagination({currentPage, totalPages, totalElements})
-                setRegions(results)
-                setLoading(false)
-            })
-    }, [server, hideDisabledRegions, name, page])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setLoading(true);
+    fetchRegions(page, server, hideDisabledRegions, name).then(
+      ({ currentPage, totalPages, totalElements, results }) => {
+        setPagination({ currentPage, totalPages, totalElements });
+        setRegions(results);
+        setLoading(false);
+      }
+    );
+  }, [server, hideDisabledRegions, name, page]);
 
-    // Setters
-    const onServerChange = (event) => {
-        setServer(event.target.value)
-        setPage(1)
+  // Setters
+  const onServerChange = (event) => {
+    setServer(event.target.value);
+    setPage(1);
+  };
+
+  const onHideDisabledRegionsChange = (event) => {
+    setHideDisabledRegions(event.target.checked);
+    setPage(1);
+  };
+
+  const onNameChange = (event, newValue) => {
+    if (typeof newValue === 'string') {
+      setName({
+        name: newValue,
+        value: newValue,
+      });
+    } else if (newValue && newValue.inputValue) {
+      setName({
+        name: newValue,
+        value: newValue,
+      });
+    } else {
+      setName(newValue);
     }
 
-    const onHideDisabledRegionsChange = (event) => {
-        setHideDisabledRegions(event.target.checked)
-        setPage(1)
-    }
+    setPage(1);
+  };
 
-    const onNameChange = (event, newValue) => {
-        if (typeof newValue === 'string') {
-            setName({
-                name: newValue,
-                value: newValue,
-            });
-        } else if (newValue && newValue.inputValue) {
-            setName({
-                name: newValue,
-                value: newValue
-            });
-        } else {
-            setName(newValue);
-        }
+  const onPageChange = (event, newPage) => {
+    setPage(newPage + 1);
+  };
 
-        setPage(1)
-    }
+  return (
+    <div className={classes.background}>
+      <Container maxWidth='lg' className={classes.container}>
+        <Filters
+          server={server}
+          setServer={onServerChange}
+          hideDisabledRegions={hideDisabledRegions}
+          setHideDisabledRegions={onHideDisabledRegionsChange}
+        />
 
-    const onPageChange = (event, newPage) => {
-        setPage(newPage + 1)
-    }
-
-    return (
-        <div className={classes.background}>
-            <Container maxWidth='lg' className={classes.container}>
-
-                <Filters
-                    server={server}
-                    setServer={onServerChange}
-                    hideDisabledRegions={hideDisabledRegions}
-                    setHideDisabledRegions={onHideDisabledRegionsChange}
-                />
-
-                <RegionResults
-                    server={server}
-                    hideDisabledRegions={hideDisabledRegions}
-                    name={name}
-                    setName={onNameChange}
-                    setPage={onPageChange}
-                    loading={loading}
-                    pagination={pagination}
-                    regions={regions}
-                    onPageChange={onPageChange}
-                />
-
-            </Container>
-        </div>
-    )
-
-}
+        <RegionResults
+          server={server}
+          hideDisabledRegions={hideDisabledRegions}
+          name={name}
+          setName={onNameChange}
+          setPage={onPageChange}
+          loading={loading}
+          pagination={pagination}
+          regions={regions}
+          onPageChange={onPageChange}
+        />
+      </Container>
+    </div>
+  );
+};
 
 const useStyles = makeStyles(() => ({
-    background: {
-        backgroundColor: '#373737',
-        minHeight: 'calc(110vh)',
-        paddingTop: '50px',
-        display: 'flex',
+  background: {
+    backgroundColor: '#373737',
+    minHeight: 'calc(110vh)',
+    paddingTop: '50px',
+    display: 'flex',
 
-        '@media (max-width: 1030px)': {
-            paddingTop: '0px'
-        }
+    '@media (max-width: 1030px)': {
+      paddingTop: '0px',
     },
+  },
 
-    container: {
-        display: 'flex',
-        '@media (max-width: 1030px)': {
-            display: 'block'
-        }
-    }
-}))
+  container: {
+    display: 'flex',
+    '@media (max-width: 1030px)': {
+      display: 'block',
+    },
+  },
+}));
 
 export default Regions;

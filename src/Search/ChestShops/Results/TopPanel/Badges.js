@@ -1,16 +1,21 @@
-import React from 'react'
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const Badges = ({ badges }) => {
   const classes = useStyles();
   return (
     <div>
-      {badges.map((badge, idx) => (
-        badge && <span key={idx} className={classes.badge}>{badge}</span>
-      ))}
+      {badges.map(
+        (badge, idx) =>
+          badge && (
+            <span key={idx} className={classes.badge}>
+              {badge}
+            </span>
+          )
+      )}
     </div>
-  )
-}
+  );
+};
 
 const useStyles = makeStyles(() => ({
   badge: {
@@ -25,9 +30,9 @@ const useStyles = makeStyles(() => ({
     marginRight: '5px',
 
     '@media (max-width: 1250px)': {
-      display: 'none'
-    }
-  }
-}))
+      display: 'none',
+    },
+  },
+}));
 
 export default Badges;
