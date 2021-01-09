@@ -8,7 +8,7 @@ const Player = ({ player }) => {
   const history = useHistory();
 
   const getTimeAgo = (timestamp) => {
-    if (timestamp === undefined) return 'never';
+    if (timestamp === null) return 'never';
     return moment(timestamp).fromNow();
   };
 
