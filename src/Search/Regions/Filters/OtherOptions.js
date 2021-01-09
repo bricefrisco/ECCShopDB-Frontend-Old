@@ -19,7 +19,7 @@ const OtherOptions = ({ hideDisabledRegions, setHideDisabledRegions }) => {
               onChange={setHideDisabledRegions}
             />
           }
-          label='Hide Disabled RegionsPanel'
+          label='Hide Disabled Regions'
           classes={materialClasses}
         />
       </div>

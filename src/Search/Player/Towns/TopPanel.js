@@ -18,7 +18,7 @@ const TopPanel = ({ loading, pagination, setPage }) => {
             <TopPagination
               pagination={pagination}
               setPage={setPage}
-              labelTextEnd={'mayors.'}
+              labelTextEnd={'towns.'}
             />
           )}
         </div>
