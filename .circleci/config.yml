@@ -37,7 +37,7 @@ jobs:
 
       - run:
           name: Deploy to server
-          command: scp -o StrictHostKeyChecking=no -r /home/circleci/application/build/* root@$HOST:/var/www/html
+          command: scp -o StrictHostKeyChecking=no -r /home/circleci/application/build/* root@$TEST_HOST:/var/www/html
 
   build:
     docker:
