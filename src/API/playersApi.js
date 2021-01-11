@@ -33,12 +33,12 @@ export const fetchPlayerNames = (hideInactivePlayers) => {
 
 export const fetchPlayerSigns = (player, tradeType, page) => {
   return fetch(
-    `${process.env.REACT_APP_BACKEND}/players/${player.name}/chest-shops?tradeType=${tradeType}&page=${page}`
+    `${process.env.REACT_APP_BACKEND}/chest-shops?playerName=${player.name}&tradeType=${tradeType}&page=${page}`
   ).then((response) => response.json());
 };
 
 export const fetchRegionsByPlayer = (name, page) => {
   return fetch(
-    `${process.env.REACT_APP_BACKEND}/players/${name}/towns?page=${page}`
+    `${process.env.REACT_APP_BACKEND}/regions?mayorName=${name}&page=${page}`
   ).then((response) => response.json());
 };
