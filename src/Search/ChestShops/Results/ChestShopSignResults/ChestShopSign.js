@@ -25,11 +25,6 @@ const ChestShopSign = ({ tradeType, server, sign }) => {
     return tradeType === 'buy' ? sign['buyPrice'] : sign['sellPrice'];
   };
 
-  const getTimeUpdatedAgo = (timestamp) => {
-    if (timestamp === undefined) return 'never';
-    return moment(timestamp).fromNow();
-  };
-
   return (
     <div className={classes.card}>
       <div className={classes.cardContents}>
@@ -44,9 +39,7 @@ const ChestShopSign = ({ tradeType, server, sign }) => {
               {getShopTradeType()} {sign['quantity']} {sign['material']} for $
               {getPricePerUnit()} each
             </span>
-            <span className={classes.updatedTime}>
-              Updated {getTimeUpdatedAgo(sign['town']['lastUpdated'])}
-            </span>
+            <span className={classes.updatedTime}></span>
           </div>
           <span className={classes.additionalInfo}>
             By{' '}
@@ -72,24 +65,16 @@ const ChestShopSign = ({ tradeType, server, sign }) => {
                 In stock ({sign['count']} left)
               </div>
             )}
-            {tradeType === 'sell' &&
-              (sign['count'] === 27 ||
-                sign['count'] === 54 ||
-                sign['count'] === 1728 ||
-                sign['count'] === 3456) && (
-                <div className={classes.maybeOutOfStock}>
-                  Potentially full (count: {sign['count']})
-                </div>
-              )}
-            {tradeType === 'sell' &&
-              sign['count'] !== 27 &&
-              sign['count'] !== 54 &&
-              sign['count'] !== 1728 &&
-              sign['count'] !== 3456 && (
-                <div className={classes.inStock}>
-                  Available (count: {sign['count']})
-                </div>
-              )}
+            {tradeType === 'sell' && sign['full'] && (
+              <div className={classes.outOfStock}>
+                Full (count: {sign['count']})
+              </div>
+            )}
+            {tradeType === 'sell' && !sign['full'] && (
+              <div className={classes.inStock}>
+                Available (count: {sign['count']})
+              </div>
+            )}
           </span>
           <span className={classes.description}>
             {sign['owner']['name']} is {getShopTradeType().toLowerCase()}{' '}

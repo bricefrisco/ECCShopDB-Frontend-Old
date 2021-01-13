@@ -7,8 +7,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 const OtherOptions = ({
   hideOutOfStockSigns,
   setHideOutOfStockSigns,
-  hideIdenticalSigns,
-  setHideIdenticalSigns,
+  hideFullShops,
+  setHideFullShops,
   tradeType,
 }) => {
   const classes = useStyles();
@@ -18,18 +18,17 @@ const OtherOptions = ({
     <div>
       <Typography className={classes.optionText}>Options</Typography>
 
-      <div>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={hideIdenticalSigns}
-              onChange={setHideIdenticalSigns}
-            />
-          }
-          label='Hide Identical Signs'
-          classes={materialClasses}
-        />
-      </div>
+      {tradeType === 'sell' && (
+        <div>
+          <FormControlLabel
+            control={
+              <Checkbox checked={hideFullShops} onChange={setHideFullShops} />
+            }
+            label='Hide Full Shops'
+            classes={materialClasses}
+          />
+        </div>
+      )}
 
       {tradeType === 'buy' && (
         <div>
@@ -40,7 +39,7 @@ const OtherOptions = ({
                 onChange={setHideOutOfStockSigns}
               />
             }
-            label='Hide Out of Stock Signs'
+            label='Hide Out of Stock Shops'
             classes={materialClasses}
           />
         </div>

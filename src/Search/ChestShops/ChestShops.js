@@ -14,8 +14,8 @@ const ChestShops = () => {
   const [server, setServer] = useState('all');
   const [tradeType, setTradeType] = useState('buy');
   const [sortBy, setSortBy] = useState('best-price');
-  const [hideIdenticalSigns, setHideIdenticalSigns] = useState(true);
   const [hideOutOfStockSigns, setHideOutOfStockSigns] = useState(true);
+  const [hideFullShops, setHideFullShops] = useState(true);
   const [material, setMaterial] = useState(null);
 
   // Results
@@ -33,8 +33,8 @@ const ChestShops = () => {
       server,
       tradeType,
       sortBy,
-      hideIdenticalSigns,
       hideOutOfStockSigns,
+      hideFullShops,
       material
     ).then(({ currentPage, totalElements, results }) => {
       setPagination({ currentPage, totalElements });
@@ -46,8 +46,8 @@ const ChestShops = () => {
     server,
     tradeType,
     sortBy,
-    hideIdenticalSigns,
     hideOutOfStockSigns,
+    hideFullShops,
     material,
   ]);
 
@@ -67,13 +67,13 @@ const ChestShops = () => {
     setPage(1);
   };
 
-  const onHideIdenticalSignsChange = (event) => {
-    setHideIdenticalSigns(event.target.checked);
+  const onHideOutOfStockSignsChange = (event) => {
+    setHideOutOfStockSigns(event.target.checked);
     setPage(1);
   };
 
-  const onHideOutOfStockSignsChange = (event) => {
-    setHideOutOfStockSigns(event.target.checked);
+  const onHideFullShopsChange = (event) => {
+    setHideFullShops(event.target.checked);
     setPage(1);
   };
 
@@ -109,8 +109,8 @@ const ChestShops = () => {
           setServer={onServerChange}
           hideOutOfStockSigns={hideOutOfStockSigns}
           setHideOutOfStockSigns={onHideOutOfStockSignsChange}
-          hideIdenticalSigns={hideIdenticalSigns}
-          setHideIdenticalSigns={onHideIdenticalSignsChange}
+          hideFullShops={hideFullShops}
+          setHideFullShops={onHideFullShopsChange}
           sortBy={sortBy}
           setSortBy={onSortByChange}
         />
@@ -124,7 +124,6 @@ const ChestShops = () => {
           material={material}
           onMaterialChange={onMaterialChange}
           hideOutOfStockSigns={hideOutOfStockSigns}
-          hideIdenticalSigns={hideIdenticalSigns}
           page={page}
           setPage={onPageChange}
         />

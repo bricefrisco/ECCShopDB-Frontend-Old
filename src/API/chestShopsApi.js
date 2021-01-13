@@ -3,8 +3,8 @@ export const fetchChestShopSigns = (
   server,
   tradeType,
   sortBy,
-  hideIdenticalSigns,
   hideOutOfStockSigns,
+  hideFullShops,
   material
 ) => {
   const url = new URL(`${process.env.REACT_APP_BACKEND}/chest-shops`);
@@ -16,12 +16,12 @@ export const fetchChestShopSigns = (
     url.searchParams.append('server', server);
   }
 
-  if (hideIdenticalSigns) {
-    url.searchParams.append('filterIdenticalSigns', 'true');
+  if (hideOutOfStockSigns && tradeType === 'buy') {
+    url.searchParams.append('hideOutOfStock', 'true');
   }
 
-  if (hideOutOfStockSigns) {
-    url.searchParams.append('hideOutOfStock', 'true');
+  if (hideFullShops && tradeType === 'sell') {
+    url.searchParams.append('hideFull', 'true');
   }
 
   if (material) {

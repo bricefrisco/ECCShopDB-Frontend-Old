@@ -16,7 +16,6 @@ const ChestShopSignResults = ({
   material,
   onMaterialChange,
   hideOutOfStockSigns,
-  hideIdenticalSigns,
   signs,
 }) => {
   const classes = useStyles();
@@ -33,7 +32,6 @@ const ChestShopSignResults = ({
         material={material}
         onMaterialChange={onMaterialChange}
         hideOutOfStockSigns={hideOutOfStockSigns}
-        hideIdenticalSigns={hideIdenticalSigns}
       />
 
       {loading ? (
