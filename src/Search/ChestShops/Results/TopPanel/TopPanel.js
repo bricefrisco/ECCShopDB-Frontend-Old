@@ -17,7 +17,6 @@ const TopPanel = ({
   material,
   onMaterialChange,
   hideOutOfStockSigns,
-  hideIdenticalSigns,
 }) => {
   const classes = useStyles();
 
@@ -44,7 +43,6 @@ const TopPanel = ({
               server && `server:${server}`,
               material && `item:${material.value}`,
               hideOutOfStockSigns && 'hide-outofstock',
-              hideIdenticalSigns && 'hide-identical',
             ]}
           />
         </div>

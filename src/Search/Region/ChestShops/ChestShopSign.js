@@ -38,9 +38,7 @@ const ChestShopSign = ({ sign, tradeType }) => {
               {getShopTradeType()} {sign['quantity']} {sign['material']} for $
               {getPricePerUnit()} each
             </span>
-            <span className={classes.updatedTime}>
-              Updated {getTimeUpdatedAgo(sign['town']['lastUpdated'])}
-            </span>
+            <span className={classes.updatedTime}></span>
           </div>
 
           <span className={classes.additionalInfo}>

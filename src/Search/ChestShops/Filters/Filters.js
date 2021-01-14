@@ -14,8 +14,8 @@ const Filters = ({
   setServer,
   hideOutOfStockSigns,
   setHideOutOfStockSigns,
-  hideIdenticalSigns,
-  setHideIdenticalSigns,
+  hideFullShops,
+  setHideFullShops,
   sortBy,
   setSortBy,
 }) => {
@@ -32,10 +32,10 @@ const Filters = ({
 
       <div className={classes.filterGroup}>
         <OtherOptions
-          hideIdenticalSigns={hideIdenticalSigns}
-          setHideIdenticalSigns={setHideIdenticalSigns}
           hideOutOfStockSigns={hideOutOfStockSigns}
           setHideOutOfStockSigns={setHideOutOfStockSigns}
+          hideFullShops={hideFullShops}
+          setHideFullShops={setHideFullShops}
           tradeType={tradeType}
         />
         <SortByOptions sortBy={sortBy} setSortBy={setSortBy} />

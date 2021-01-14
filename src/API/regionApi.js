@@ -35,12 +35,12 @@ export const fetchRegions = (page, server, active, name) => {
 
 export const fetchRegionSigns = (region, tradeType, page) => {
   return fetch(
-    `${process.env.REACT_APP_BACKEND}/regions/${region.server}/${region.name}/chest-shops?page=${page}&tradeType=${tradeType}`
+    `${process.env.REACT_APP_BACKEND}/chest-shops?server=${region.server}&regionName=${region.name}&tradeType=${tradeType}&page=${page}`
   ).then((response) => response.json());
 };
 
 export const getPlayersByRegion = (server, name, page) => {
   return fetch(
-    `${process.env.REACT_APP_BACKEND}/regions/${server}/${name}/mayors?page=${page}`
+    `${process.env.REACT_APP_BACKEND}/players?server=${server}&regionName=${name}&page=${page}`
   ).then((response) => response.json());
 };

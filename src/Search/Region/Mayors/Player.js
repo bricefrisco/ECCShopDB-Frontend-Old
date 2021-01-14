@@ -108,9 +108,7 @@ const Player = ({ player }) => {
             <span className={classes.headline}>
               {player['name'].toLowerCase()}
             </span>
-            <span className={classes.updatedTime}>
-              Updated {getTimeAgo(player['lastUpdated'])}
-            </span>
+            <span className={classes.updatedTime}></span>
           </div>
           <span className={classes.townInfo}>Towns: {getTowns(player)}</span>
           {player['active'] && (

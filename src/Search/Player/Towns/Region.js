@@ -120,9 +120,7 @@ const Region = ({ region }) => {
             <span className={classes.headline}>
               {region.name.toLowerCase()}
             </span>
-            <span className={classes.updatedTime}>
-              Updated {getTimeUpdatedAgo(region['lastUpdated'])}
-            </span>
+            <span className={classes.updatedTime}></span>
           </div>
           <span className={classes.additionalInfo}>
             Mayors: {getMayors(region['mayors'])}
