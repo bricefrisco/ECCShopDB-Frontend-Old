@@ -20,3 +20,17 @@ code {
 .MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.Mui-selected.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button.Mui-selected {
   background-color: #323232;
 }
+
+.MuiAlert-standardInfo {
+  background-color: #242526 !important;
+  color: rgb(255, 255, 255, 0.5) !important;
+}
+
+.alertLink {
+  color: #6ba65e;
+  text-decoration: none;
+}
+
+.alertLink:hover {
+  text-decoration: underline;
+}
