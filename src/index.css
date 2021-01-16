@@ -135,6 +135,10 @@ body {
   display: flex;
 }
 
+.inline-flex {
+  display: inline-flex;
+}
+
 .flex-column {
   flex-direction: column;
 }
