@@ -1,0 +1,30 @@
+#navbar,
+#navbar .container {
+  min-height: 64px;
+}
+
+#navbar #logo {
+  width: 40px;
+  height: 40px;
+}
+
+#navbar .nav-item {
+  color: inherit;
+}
+
+#navbar .nav-item,
+#navbar .nav-item-selected {
+  padding: 5px 15px;
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+}
+
+#navbar .nav-item-selected:hover {
+  cursor: pointer;
+}
+
+#navbar .nav-item:hover {
+  border-bottom: 1px solid #6ba75e;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.95);
+}
