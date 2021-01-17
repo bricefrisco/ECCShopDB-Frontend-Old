@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Home } from './home';
+import SearchChestShops from './search/SearchChestShops';
 import { Navbar } from './shared/navbar';
-import { SearchNavbar } from './shared/search-navbar/SearchNavbar';
+import { SearchNavbar } from './shared/search-navbar';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/search/chest-shops'>
           <Navbar selectedPage='search' />
           <SearchNavbar selectedPage='chest-shops' />
+          <SearchChestShops />
         </Route>
 
         <Route exact path='/search/regions'>

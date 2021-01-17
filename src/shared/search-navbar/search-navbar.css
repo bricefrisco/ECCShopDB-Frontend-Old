@@ -15,6 +15,6 @@
 
 #search-navbar .search-navbar-item:hover,
 #search-navbar .search-navbar-item.selected {
-  border-bottom: 4px solid #6ba75e;
+  border-bottom: 2px solid #6ba75e;
   color: #6ba75e;
 }

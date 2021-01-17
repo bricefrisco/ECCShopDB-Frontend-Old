@@ -1,0 +1,20 @@
+#filters .filter {
+  max-width: 275px;
+  min-width: 275px;
+}
+
+/* Override material-ui icons */
+#filters .MuiSvgIcon-root {
+  font-size: 1rem;
+  color: #6ba65e;
+}
+
+/* Override material-ui labels */
+#filters .MuiTypography-root.MuiFormControlLabel-label {
+  font-size: 15px;
+}
+
+/* Override material-ui select */
+#filters .sort-by-selector {
+  width: 200px;
+}
