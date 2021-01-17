@@ -68,6 +68,7 @@ export const Select = ({
   loading,
   onFocus,
   windowed,
+  isClearable,
 }) => {
   return (
     <ReactSelect
@@ -77,6 +78,7 @@ export const Select = ({
       value={value}
       onChange={setValue}
       isSearchable={isSearchable}
+      isClearable={isClearable}
       styles={colorStyles}
       placeholder={placeholder}
       isLoading={loading}

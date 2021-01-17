@@ -16,6 +16,7 @@ import {
 
 import { Select } from '../shared/select';
 import { TopPagination } from '../shared/top-pagination';
+import { ChestShop } from '../shared/chest-shop';
 
 const ChestShops = () => {
   const dispatch = useDispatch();
@@ -49,9 +50,13 @@ const ChestShops = () => {
           setValue={(e, v) => dispatch(setMaterial(e))}
           loading={materials.loading}
           options={materials.results}
+          isClearable
           windowed
         />
       </div>
+      {results.map((chestShop) => (
+        <ChestShop chestShop={chestShop} tradeType={options.tradeType} />
+      ))}
     </div>
   );
 };
