@@ -19,6 +19,7 @@ export const chestShopsSlice = createSlice({
     errorMessage: '',
     results: [],
     totalResults: 1,
+    totalPages: 1,
     materials: {
       loading: false,
       error: false,
@@ -68,6 +69,7 @@ export const chestShopsSlice = createSlice({
       state.loading = false;
       state.results = action.payload.results;
       state.totalResults = action.payload.totalResults;
+      state.totalPages = action.payload.totalPages;
     },
 
     errored: (state, action) => {
@@ -76,6 +78,8 @@ export const chestShopsSlice = createSlice({
       state.loading = false;
       state.results = [];
       state.options.page = 1;
+      state.totalResults = 0;
+      state.totalPages = 0;
     },
 
     loadingMaterials: (state) => {
@@ -121,6 +125,7 @@ export const getError = (state) => state.chestShops.error;
 export const getErrorMessage = (state) => state.chestShops.errorMessage;
 export const getTotalResults = (state) => state.chestShops.totalResults;
 export const getMaterials = (state) => state.chestShops.materials;
+export const getTotalPages = (state) => state.chestShops.totalPages;
 
 export const fetchChestShops = () => (dispatch, getState) => {
   const options = getState().chestShops.options;
@@ -155,11 +160,18 @@ export const fetchChestShops = () => (dispatch, getState) => {
         loaded({
           results: response.results,
           totalResults: response.totalElements,
+          totalPages: response.totalPages,
         })
       );
     })
     .catch((err) => {
-      dispatch(errored(err));
+      dispatch(
+        errored(
+          err === null || err === undefined
+            ? 'Unknown error occurred'
+            : err.toString()
+        )
+      );
     });
 };
 
@@ -182,7 +194,13 @@ export const fetchMaterials = () => (dispatch, getState) => {
       );
     })
     .catch((err) => {
-      dispatch(erroredMaterials(err));
+      dispatch(
+        erroredMaterials(
+          err === undefined || err === null
+            ? 'Unknown error occurred'
+            : err.toString()
+        )
+      );
     });
 };
 

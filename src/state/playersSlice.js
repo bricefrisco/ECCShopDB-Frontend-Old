@@ -1,14 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { parseResponse } from '../api';
 
-export const regionsSlice = createSlice({
-  name: 'regions',
+export const playersSlice = createSlice({
+  name: 'players',
+
   initialState: {
     options: {
-      server: 'all',
-      hideNonShopTowns: true,
       name: undefined,
+      hideInactivePlayers: true,
       page: 1,
+    },
+    names: {
+      loading: false,
+      error: false,
+      errorMessage: undefined,
+      results: [],
     },
     loading: false,
     error: false,
@@ -16,27 +22,19 @@ export const regionsSlice = createSlice({
     results: [],
     totalResults: 1,
     totalPages: 1,
-    names: {
-      loading: false,
-      error: false,
-      errorMessage: undefined,
-      results: [],
-    },
   },
 
   reducers: {
-    setServer: (state, action) => {
-      state.options.server = action.payload;
-      state.options.page = 1;
-    },
     setName: (state, action) => {
       state.options.name = action.payload;
       state.options.page = 1;
     },
-    setHideNonShopTowns: (state, action) => {
-      state.options.hideNonShopTowns = action.payload;
+
+    setHideInactivePlayers: (state, action) => {
+      state.options.hideInactivePlayers = action.payload;
       state.options.page = 1;
     },
+
     setPage: (state, action) => {
       state.options.page = action.payload;
     },
@@ -77,18 +75,17 @@ export const regionsSlice = createSlice({
     },
 
     erroredNames: (state, action) => {
+      state.names.loading = false;
       state.names.error = true;
       state.names.errorMessage = action.payload;
-      state.names.loading = false;
       state.names.results = [];
     },
   },
 });
 
 export const {
-  setServer,
   setName,
-  setHideNonShopTowns,
+  setHideInactivePlayers,
   setPage,
   loading,
   loaded,
@@ -96,33 +93,29 @@ export const {
   loadingNames,
   loadedNames,
   erroredNames,
-} = regionsSlice.actions;
+} = playersSlice.actions;
 
-export const getOptions = (state) => state.regions.options;
-export const getResults = (state) => state.regions.results;
-export const getLoading = (state) => state.regions.loading;
-export const getError = (state) => state.regions.error;
-export const getErrorMessage = (state) => state.regions.errorMessage;
-export const getTotalResults = (state) => state.regions.totalResults;
-export const getRegionNames = (state) => state.regions.names;
-export const getTotalPages = (state) => state.regions.totalPages;
+export const getOptions = (state) => state.players.options;
+export const getResults = (state) => state.players.results;
+export const getLoading = (state) => state.players.loading;
+export const getError = (state) => state.players.error;
+export const getErrorMessage = (state) => state.players.errorMessage;
+export const getTotalResults = (state) => state.players.totalResults;
+export const getNames = (state) => state.players.names;
+export const getTotalPages = (state) => state.players.totalPages;
 
-export default regionsSlice.reducer;
+export const fetchPlayers = () => (dispatch, getState) => {
+  const options = getState().players.options;
 
-export const fetchRegions = () => (dispatch, getState) => {
-  const options = getState().regions.options;
-
-  const url = new URL(`${process.env.REACT_APP_BACKEND}/regions`);
-
+  const url = new URL(`${process.env.REACT_APP_BACKEND}/players`);
   url.searchParams.append('page', options.page);
-  url.searchParams.append('active', options.hideNonShopTowns);
 
-  if (options.server !== 'all') {
-    url.searchParams.append('server', options.server);
+  if (options.hideInactivePlayers) {
+    url.searchParams.append('active', true);
   }
 
   if (options.name) {
-    url.searchParams.append('name', options.name.value);
+    url.searchParams.append('name', options.name);
   }
 
   dispatch(loading());
@@ -149,17 +142,12 @@ export const fetchRegions = () => (dispatch, getState) => {
     });
 };
 
-export const fetchRegionNames = () => (dispatch, getState) => {
-  const options = getState().regions.options;
-
-  dispatch(loadingNames());
+export const fetchPlayerNames = () => (dispatch, getState) => {
+  const options = getState().players.options;
 
   fetch(
-    `${process.env.REACT_APP_BACKEND}/regions/region-names?server=${
-      options.server === 'all' ? '' : options.server
-    }&active=${options.hideNonShopTowns}`
+    `${process.env.REACT_APP_BACKEND}/players/player-names?active=${options.hideInactivePlayers}`
   )
-    .then(parseResponse)
     .then((response) => {
       dispatch(
         loadedNames(response.map((name) => ({ value: name, label: name })))
@@ -175,3 +163,5 @@ export const fetchRegionNames = () => (dispatch, getState) => {
       );
     });
 };
+
+export default playersSlice.reducer;

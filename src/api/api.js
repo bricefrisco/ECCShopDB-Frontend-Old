@@ -1,7 +1,9 @@
 export const parseResponse = (response) => {
-  if (!response.ok) {
-    throw new Error(response.message);
-  } else {
-    return response.json();
-  }
+  return response.json().then((response) => {
+    if (response.error) {
+      throw new Error(response.message);
+    } else {
+      return response;
+    }
+  });
 };

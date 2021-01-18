@@ -126,15 +126,15 @@ export const Home = () => {
             <h2 className='txt-lg weight-norm pb-50'>How it works</h2>
 
             <div className='grid'>
-              <img src='/img/plugin.png' />
+              <img src='/img/plugin.png' alt='Plugin' />
               <div className='description'>
                 <h3 className='txt-md weight-lite pb-3'>EcoCityCraft Plugin</h3>
                 <p className='lh-md txt-norm weight-lite'>
-                  A custom plugin made captures shop events. These events are
-                  sent to ShopDB every 10 minutes and are parsed to extract
+                  A custom server-side plugin captures shop events. These events
+                  are sent to ShopDB every 10 minutes and are parsed to extract
                   information such as stock count, location, and items being
-                  traded. This data is stored in a way that easily allows
-                  searching for shops you are looking for.
+                  traded. This data is stored in a way that easily allows you to
+                  search for shops you are looking for.
                 </p>
               </div>
 
@@ -143,9 +143,10 @@ export const Home = () => {
                 <h3 className='txt-md weight-lite pb-3'>EcoCityCraft Bot</h3>
                 <p className='lh-md txt-norm weight-lite'>
                   Dugly is a bot that navigates around the game and adds new
-                  regions, as well as updates players last /seen times. He used
-                  to scan and parse shops as well, but that job has been taken
-                  by the plugin which is much more efficient and reliable.
+                  regions and players last /seen times. He used to scan and
+                  parse shops as well, but that job has been delegated to the
+                  server-side plugin which has proved to be much more efficient
+                  and reliable.
                 </p>
               </div>
             </div>

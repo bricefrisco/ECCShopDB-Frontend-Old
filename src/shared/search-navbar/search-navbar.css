@@ -18,3 +18,16 @@
   border-bottom: 2px solid #6ba75e;
   color: #6ba75e;
 }
+
+@media (max-width: 442px) {
+  #search-navbar .search-navbar-item {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}
+
+@media (max-width: 364px) {
+  #search-navbar .search-navbar-icon {
+    display: none;
+  }
+}

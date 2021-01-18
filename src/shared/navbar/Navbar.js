@@ -7,7 +7,7 @@ export const Navbar = ({ selectedPage }) => {
   return (
     <header id='navbar' className='background-black'>
       <div className='container flex flex-between flex-center'>
-        <img src='/img/logo.png' id='logo' />
+        <img src='/img/logo.png' id='logo' alt='Logo' />
         <nav id='navigation'>
           <NavItem uri='/home' text='Home' selected={selectedPage === 'home'} />
           <NavItem

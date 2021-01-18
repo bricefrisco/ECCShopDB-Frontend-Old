@@ -41,6 +41,7 @@ const MenuList = ({ options, children, maxHeight, getValue }) => {
   const initialOffset = options.indexOf(value) * height;
 
   const getMaxHeight = () => {
+    if (children.length === undefined) return 50;
     if (children.length >= 10) return maxHeight;
     return maxHeight - height * (10 - children.length) + 5;
   };

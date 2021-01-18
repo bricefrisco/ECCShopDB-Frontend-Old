@@ -2,27 +2,26 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getOptions,
-  fetchChestShops,
+  fetchPlayers,
   setPage,
   getResults,
   getError,
   getErrorMessage,
+  getNames,
   getLoading,
   getTotalResults,
-  getMaterials,
   getTotalPages,
-  fetchMaterials,
-  setMaterial,
-} from '../state/chestShopsSlice';
+  fetchPlayerNames,
+  setName,
+} from '../state/playersSlice';
 
 import { Select } from '../shared/select';
 import { TopPagination } from '../shared/top-pagination';
 import { BottomPagination } from '../shared/bottom-pagination';
-import { ChestShop } from '../shared/chest-shop';
 import { Loading } from '../shared/loading';
 import { AlertError } from '../shared/alert-error';
 
-const ChestShops = () => {
+const Players = () => {
   const dispatch = useDispatch();
 
   const options = useSelector(getOptions);
@@ -32,10 +31,10 @@ const ChestShops = () => {
   const error = useSelector(getError);
   const errorMessage = useSelector(getErrorMessage);
   const loading = useSelector(getLoading);
-  const materials = useSelector(getMaterials);
+  const names = useSelector(getNames);
 
   useEffect(() => {
-    dispatch(fetchChestShops());
+    dispatch(fetchPlayers());
   }, [options, dispatch]);
 
   return (
@@ -45,17 +44,17 @@ const ChestShops = () => {
           page={options.page}
           setPage={(e, page) => dispatch(setPage(page + 1))}
           count={totalResults}
-          labelTextEnd='chest shops.'
+          labelTextEnd='players.'
           loading={loading}
         />
 
         <Select
-          className='item-selector'
-          placeholder='Item Name...'
-          onFocus={() => dispatch(fetchMaterials())}
-          setValue={(e, v) => dispatch(setMaterial(e))}
-          loading={materials.loading}
-          options={materials.results}
+          className='name-selector'
+          placeHolder='Player Name...'
+          onFocus={() => dispatch(fetchPlayerNames())}
+          setValue={(e, v) => dispatch(setName(e))}
+          loading={names.loading}
+          options={names.results}
           isClearable
           windowed
         />
@@ -67,17 +66,9 @@ const ChestShops = () => {
         <AlertError
           errorMessage={errorMessage}
           className='mt-3'
-          retry={() => dispatch(fetchChestShops())}
+          retry={() => dispatch(fetchPlayers())}
         />
       )}
-
-      {results.map((chestShop) => (
-        <ChestShop
-          chestShop={chestShop}
-          key={chestShop.id}
-          tradeType={options.tradeType}
-        />
-      ))}
 
       {results.length !== 0 && (
         <BottomPagination
@@ -90,4 +81,4 @@ const ChestShops = () => {
   );
 };
 
-export default ChestShops;
+export default Players;

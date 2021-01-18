@@ -10,10 +10,13 @@ import {
   setHideOutOfStock,
   setSortBy,
   setHideFull,
+  getSortBy,
 } from '../state/chestShopsSlice';
 import { Filter, TradeTypeFilter, ServerFilter } from '../shared/filters';
 import { Select } from '../shared/select';
 import ChestShops from './ChestShops';
+
+import './search.css';
 
 const SearchChestShops = () => {
   const dispatch = useDispatch();
@@ -25,70 +28,68 @@ const SearchChestShops = () => {
     { value: 'quantity-available', label: 'Quantity Available' },
   ];
 
+  const test = (e) => {
+    console.log(e);
+  };
+
   return (
-    <>
-      <section id='chest-shops' className='background vh-100 pt-50'>
-        <div className='container flex'>
-          <div id='filters'>
-            <h3 className='color-white weight-lite txt-sm'>Filters</h3>
-            <TradeTypeFilter
-              value={options.tradeType}
-              setValue={(e) => dispatch(setTradeType(e.target.value))}
-            />
-            <ServerFilter
-              value={options.server}
-              setValue={(e) => dispatch(setServer(e.target.value))}
-            />
+    <section id='chest-shops' className='background vh-100 pt-50'>
+      <div className='container flex'>
+        <div id='filters'>
+          <h3 className='color-white weight-bold txt-sm'>Filters</h3>
+          <TradeTypeFilter
+            value={options.tradeType}
+            setValue={(e) => dispatch(setTradeType(e.target.value))}
+          />
+          <ServerFilter
+            value={options.server}
+            setValue={(e) => dispatch(setServer(e.target.value))}
+          />
 
-            {options.tradeType === 'buy' ? (
-              <Filter title='Options'>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={options.hideOutOfStock}
-                      onChange={(e) =>
-                        dispatch(setHideOutOfStock(e.target.checked))
-                      }
-                    />
-                  }
-                  label='Hide Out of Stock Shops'
-                />
-              </Filter>
-            ) : (
-              <Filter title='Options'>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={options.hideFull}
-                      onChange={(e) => dispatch(setHideFull(e.target.checked))}
-                    />
-                  }
-                  label='Hide Full Shops'
-                />
-              </Filter>
-            )}
+          {options.tradeType === 'buy' ? (
+            <Filter title='Options'>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={options.hideOutOfStock}
+                    onChange={(e) =>
+                      dispatch(setHideOutOfStock(e.target.checked))
+                    }
+                  />
+                }
+                label='Hide Out of Stock Shops'
+              />
+            </Filter>
+          ) : (
+            <Filter title='Options'>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={options.hideFull}
+                    onChange={(e) => dispatch(setHideFull(e.target.checked))}
+                  />
+                }
+                label='Hide Full Shops'
+              />
+            </Filter>
+          )}
 
-            {options.tradeType === 'buy' && (
-              <Filter title='Sort By'>
-                <Select
-                  className='sort-by-selector'
-                  value={
-                    sortByOptions.filter(
-                      (opt) => opt.value === options.sortBy
-                    )[0]
-                  }
-                  onChange={(e) => dispatch(setSortBy(e.value))}
-                  options={sortByOptions}
-                  isSearchable={false}
-                />
-              </Filter>
-            )}
-          </div>
-
-          <ChestShops />
+          {options.tradeType === 'buy' && (
+            <Filter title='Sort By'>
+              <Select
+                className='sort-by-selector'
+                value={options.sortBy}
+                setValue={(e) => dispatch(setSortBy(e))}
+                options={sortByOptions}
+                isSearchable={false}
+              />
+            </Filter>
+          )}
         </div>
-      </section>
-    </>
+
+        <ChestShops />
+      </div>
+    </section>
   );
 };
 

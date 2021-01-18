@@ -1,8 +1,31 @@
-.mc-avatar {
+#chest-shops .mc-avatar {
   height: 67px;
   width: 67px;
 }
 
-.chest-shop-description {
+#chest-shops .ml-80 {
   margin-left: 80px;
+}
+
+#chest-shops .chest-shop-description {
+  margin-left: 80px;
+}
+
+@media (max-width: 500px) {
+  #chest-shops .mc-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  #chest-shops .ml-80 {
+    margin-left: 50px;
+  }
+
+  #chest-shops .chest-shop-description {
+    margin-left: 50px;
+  }
+
+  #chest-shops .copy-button {
+    display: none;
+  }
 }

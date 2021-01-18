@@ -2,27 +2,27 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getOptions,
-  fetchChestShops,
+  fetchRegions,
   setPage,
   getResults,
   getError,
   getErrorMessage,
+  getRegionNames,
   getLoading,
   getTotalResults,
-  getMaterials,
   getTotalPages,
-  fetchMaterials,
-  setMaterial,
-} from '../state/chestShopsSlice';
+  fetchRegionNames,
+  setName,
+} from '../state/regionsSlice';
 
 import { Select } from '../shared/select';
 import { TopPagination } from '../shared/top-pagination';
 import { BottomPagination } from '../shared/bottom-pagination';
-import { ChestShop } from '../shared/chest-shop';
 import { Loading } from '../shared/loading';
 import { AlertError } from '../shared/alert-error';
+import { Region } from '../shared/region';
 
-const ChestShops = () => {
+const Regions = () => {
   const dispatch = useDispatch();
 
   const options = useSelector(getOptions);
@@ -32,10 +32,10 @@ const ChestShops = () => {
   const error = useSelector(getError);
   const errorMessage = useSelector(getErrorMessage);
   const loading = useSelector(getLoading);
-  const materials = useSelector(getMaterials);
+  const names = useSelector(getRegionNames);
 
   useEffect(() => {
-    dispatch(fetchChestShops());
+    dispatch(fetchRegions());
   }, [options, dispatch]);
 
   return (
@@ -45,17 +45,17 @@ const ChestShops = () => {
           page={options.page}
           setPage={(e, page) => dispatch(setPage(page + 1))}
           count={totalResults}
-          labelTextEnd='chest shops.'
+          labelTextEnd='regions.'
           loading={loading}
         />
 
         <Select
-          className='item-selector'
-          placeholder='Item Name...'
-          onFocus={() => dispatch(fetchMaterials())}
-          setValue={(e, v) => dispatch(setMaterial(e))}
-          loading={materials.loading}
-          options={materials.results}
+          className='name-selector'
+          placeHolder='Region Name...'
+          onFocus={() => dispatch(fetchRegionNames())}
+          setValue={(e, v) => dispatch(setName(e))}
+          loading={names.loading}
+          options={names.results}
           isClearable
           windowed
         />
@@ -67,17 +67,12 @@ const ChestShops = () => {
         <AlertError
           errorMessage={errorMessage}
           className='mt-3'
-          retry={() => dispatch(fetchChestShops())}
+          retry={() => dispatch(fetchRegions())}
         />
       )}
 
-      {results.map((chestShop) => (
-        <ChestShop
-          chestShop={chestShop}
-          key={chestShop.id}
-          tradeType={options.tradeType}
-        />
-      ))}
+      {results &&
+        results.map((region) => <Region region={region} key={region.id} />)}
 
       {results.length !== 0 && (
         <BottomPagination
@@ -90,4 +85,4 @@ const ChestShops = () => {
   );
 };
 
-export default ChestShops;
+export default Regions;
