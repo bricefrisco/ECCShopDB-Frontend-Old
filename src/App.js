@@ -7,6 +7,7 @@ import { SearchNavbar } from './shared/search-navbar';
 import SearchChestShops from './search/SearchChestShops';
 import SearchRegions from './search/SearchRegions';
 import SearchPlayers from './search/SearchPlayers';
+import SearchPlayer from './search/SearchPlayer';
 
 function App() {
   return (
@@ -33,6 +34,12 @@ function App() {
           <Navbar selectedPage='search' />
           <SearchNavbar selectedPage='players' />
           <SearchPlayers />
+        </Route>
+
+        <Route exact path='/search/players/:name'>
+          <Navbar selectedPage='search' />
+          <SearchNavbar selectedPage='players' />
+          <SearchPlayer />
         </Route>
 
         <Route path='/'>

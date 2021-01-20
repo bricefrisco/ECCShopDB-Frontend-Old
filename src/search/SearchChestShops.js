@@ -28,10 +28,6 @@ const SearchChestShops = () => {
     { value: 'quantity-available', label: 'Quantity Available' },
   ];
 
-  const test = (e) => {
-    console.log(e);
-  };
-
   return (
     <section id='chest-shops' className='background vh-100 pt-50'>
       <div className='container flex'>

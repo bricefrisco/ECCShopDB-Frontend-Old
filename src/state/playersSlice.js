@@ -115,7 +115,7 @@ export const fetchPlayers = () => (dispatch, getState) => {
   }
 
   if (options.name) {
-    url.searchParams.append('name', options.name);
+    url.searchParams.append('name', options.name.value);
   }
 
   dispatch(loading());
@@ -148,6 +148,7 @@ export const fetchPlayerNames = () => (dispatch, getState) => {
   fetch(
     `${process.env.REACT_APP_BACKEND}/players/player-names?active=${options.hideInactivePlayers}`
   )
+    .then(parseResponse)
     .then((response) => {
       dispatch(
         loadedNames(response.map((name) => ({ value: name, label: name })))

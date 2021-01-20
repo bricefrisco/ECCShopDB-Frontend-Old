@@ -53,6 +53,7 @@ const Regions = () => {
           className='name-selector'
           placeHolder='Region Name...'
           onFocus={() => dispatch(fetchRegionNames())}
+          value={options.name}
           setValue={(e, v) => dispatch(setName(e))}
           loading={names.loading}
           options={names.results}

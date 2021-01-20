@@ -220,6 +220,14 @@ body {
   margin-right: 15px;
 }
 
+.mr-4 {
+  margin-right: 20px;
+}
+
+.mr-5 {
+  margin-right: 25px;
+}
+
 .mt-1 {
   margin-top: 5px;
 }
@@ -284,6 +292,17 @@ body {
 }
 
 .link:hover {
+  text-decoration: underline;
+}
+
+.link-no-color {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-no-color:hover {
+  cursor: pointer;
+  color: #6ba75e;
   text-decoration: underline;
 }
 

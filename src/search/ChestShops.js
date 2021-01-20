@@ -53,6 +53,7 @@ const ChestShops = () => {
           className='item-selector'
           placeholder='Item Name...'
           onFocus={() => dispatch(fetchMaterials())}
+          value={options.material}
           setValue={(e, v) => dispatch(setMaterial(e))}
           loading={materials.loading}
           options={materials.results}

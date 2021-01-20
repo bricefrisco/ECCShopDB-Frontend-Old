@@ -61,10 +61,12 @@ export const RegionDescription = ({
   );
 };
 
-export const RegionInfo = ({ name, mayors }) => {
+export const RegionInfo = ({ name, server, mayors }) => {
   return (
     <div>
-      <span className='block txt-sm weight-bold pb-1'>{name}</span>
+      <Link to={`/search/regions/${server}/${name}`} className='link-no-color'>
+        <span className='block txt-sm weight-bold pb-1'>{name}</span>
+      </Link>
 
       <span className='block txt-sm weight-lite'>
         Mayors: <Mayors names={mayors} />
@@ -83,7 +85,11 @@ export const Region = ({ region }) => {
             className={getBackgroundColor(region.name)}
           />
         </Link>
-        <RegionInfo name={region.name} mayors={region.mayors} />
+        <RegionInfo
+          name={region.name}
+          server={region.server}
+          mayors={region.mayors}
+        />
       </div>
       <RegionDescription
         name={region.name}

@@ -10,7 +10,7 @@ export const chestShopsSlice = createSlice({
       server: 'all',
       hideOutOfStock: true,
       hideFull: true,
-      sortBy: 'best-price',
+      sortBy: { value: 'best-price', label: 'Best Price' },
       material: undefined,
       page: 1,
     },
@@ -132,7 +132,7 @@ export const fetchChestShops = () => (dispatch, getState) => {
 
   const url = new URL(`${process.env.REACT_APP_BACKEND}/chest-shops`);
   url.searchParams.append('tradeType', options.tradeType);
-  url.searchParams.append('sortBy', options.sortBy);
+  url.searchParams.append('sortBy', options.sortBy.value);
   url.searchParams.append('page', options.page);
 
   if (options.server !== 'all') {

@@ -1,13 +1,15 @@
 @media (max-width: 914px) {
   #chest-shops .container.flex,
-  #regions .container.flex {
+  #regions .container.flex,
+  #players .container.flex {
     display: block;
   }
 }
 
 @media (max-width: 626px) {
   #chest-shops .MuiTypography-root.MuiTablePagination-caption,
-  #regions .MuiTypography-root.MuiTablePagination-caption {
+  #regions .MuiTypography-root.MuiTablePagination-caption,
+  #players .MuiTypography-root.MuiTablePagination-caption {
     display: none !important;
   }
 }

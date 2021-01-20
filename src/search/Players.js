@@ -20,6 +20,7 @@ import { TopPagination } from '../shared/top-pagination';
 import { BottomPagination } from '../shared/bottom-pagination';
 import { Loading } from '../shared/loading';
 import { AlertError } from '../shared/alert-error';
+import { Player } from '../shared/player';
 
 const Players = () => {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const Players = () => {
           className='name-selector'
           placeHolder='Player Name...'
           onFocus={() => dispatch(fetchPlayerNames())}
+          value={options.name}
           setValue={(e, v) => dispatch(setName(e))}
           loading={names.loading}
           options={names.results}
@@ -69,6 +71,10 @@ const Players = () => {
           retry={() => dispatch(fetchPlayers())}
         />
       )}
+
+      {results.map((player) => (
+        <Player player={player} />
+      ))}
 
       {results.length !== 0 && (
         <BottomPagination

@@ -1,10 +1,10 @@
-#chest-shops .mc-avatar {
+#players .mc-avatar {
   height: 67px;
   width: 67px;
 }
 
 #players .ml-80 {
-  margin-left: 90px;
+  margin-left: 85px;
 }
 
 @media (max-width: 500px) {
