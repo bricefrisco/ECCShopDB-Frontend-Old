@@ -29,9 +29,18 @@ const PlayerBreadcrumbs = ({ name }) => {
   );
 };
 
+const LastUpdated = ({lastUpdated}) => {
+  return (
+    <div className='last-updated background-dark'>
+      <span className='block txt-sm weight-bold pl-4 pt-4 pb-3 border-bottom'>Player Last Updated</span>
+      <span className='block txt-sm pl-4 pt-2 pb-3'>{getTimeFromNow(lastUpdated)}</span>
+    </div>
+  )
+}
+
 const PlayerInfo = ({ name, lastSeen, numTowns, numChestShops }) => {
   return (
-    <div className='container pt-50 pb-50 background flex'>
+    <div className='pt-50 pb-50 background flex'>
       <img
         className='mc-avatar mr-4'
         src={`https://minotar.net/avatar/${name}/100`}
@@ -79,6 +88,8 @@ const SearchPlayer = () => {
       <PlayerBreadcrumbs name={name} />
       <div id='player' className='background vh-100'>
         {loading && <Loading />}
+
+        <div className='container flex flex-between flex-center'>
         {player && (
           <PlayerInfo
             name={player.name}
@@ -87,6 +98,11 @@ const SearchPlayer = () => {
             numTowns={player.towns.length}
           />
         )}
+
+        {player && player.lastUpdated && (
+          <LastUpdated lastUpdated={player.lastUpdated} />
+        )}
+        </div>
       </div>
     </>
   );

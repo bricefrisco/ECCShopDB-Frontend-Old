@@ -1,3 +1,7 @@
+#player .last-updated {
+  min-width: 315px;
+}
+
 @media (max-width: 914px) {
   #chest-shops .container.flex,
   #regions .container.flex,
