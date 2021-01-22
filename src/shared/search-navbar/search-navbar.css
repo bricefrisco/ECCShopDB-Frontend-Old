@@ -1,0 +1,33 @@
+#search-navbar {
+  min-height: 64px;
+}
+
+#search-navbar .search-navbar-item {
+  min-height: 64px;
+  padding: 0 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+#search-navbar .search-navbar-item .search-navbar-icon {
+  margin-right: 5px;
+}
+
+#search-navbar .search-navbar-item:hover,
+#search-navbar .search-navbar-item.selected {
+  border-bottom: 2px solid #6ba75e;
+  color: #6ba75e;
+}
+
+@media (max-width: 442px) {
+  #search-navbar .search-navbar-item {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}
+
+@media (max-width: 364px) {
+  #search-navbar .search-navbar-icon {
+    display: none;
+  }
+}

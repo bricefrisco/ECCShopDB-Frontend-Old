@@ -1,0 +1,71 @@
+/**
+* Homepage-specific styling
+**/
+
+#intro #stats {
+  max-width: 700px;
+  margin: auto;
+}
+
+#features .feature {
+  max-width: 500px;
+}
+
+#features .main-feature {
+  max-width: 1066px;
+}
+
+#how-it-works .description {
+  max-width: 700px;
+}
+
+#how-it-works #dugly-skin-viewer:focus {
+  outline: none;
+}
+
+@media (max-width: 1050px) {
+  #features .flex {
+    display: block;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  #features .feature {
+    margin: auto;
+    max-width: none;
+    margin-bottom: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  #features .main-feature {
+    margin-bottom: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  #how-it-works .grid {
+    grid-template-columns: auto;
+    grid-row-gap: 50px;
+  }
+
+  #how-it-works img {
+    display: none;
+  }
+
+  #how-it-works #dugly-skin-viewer {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #how-it-works .description {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #forum p {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
