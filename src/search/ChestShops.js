@@ -39,19 +39,19 @@ const ChestShops = () => {
   }, [options, dispatch]);
 
   return (
-    <div className='w-100'>
-      <div className='flex flex-between flex-center'>
+    <div className="w-100">
+      <div id="results-top-panel" className="flex flex-between flex-center">
         <TopPagination
           page={options.page}
           setPage={(e, page) => dispatch(setPage(page + 1))}
           count={totalResults}
-          labelTextEnd='chest shops.'
+          labelTextEnd="chest shops."
           loading={loading}
         />
 
         <Select
-          className='item-selector'
-          placeholder='Item Name...'
+          className="item-selector"
+          placeholder="Item Name..."
           onFocus={() => dispatch(fetchMaterials())}
           value={options.material}
           setValue={(e, v) => dispatch(setMaterial(e))}
@@ -62,12 +62,12 @@ const ChestShops = () => {
         />
       </div>
 
-      {loading && <Loading className='mt-5' />}
+      {loading && <Loading className="mt-5" />}
 
       {error && (
         <AlertError
           errorMessage={errorMessage}
-          className='mt-3'
+          className="mt-3"
           retry={() => dispatch(fetchChestShops())}
         />
       )}

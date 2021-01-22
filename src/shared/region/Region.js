@@ -5,7 +5,7 @@ import StoreIcon from '@material-ui/icons/Store';
 import { CopyButton } from '../copy-button';
 import './region.css';
 
-const getBackgroundColor = (regionName) => {
+export const getBackgroundColor = (regionName) => {
   const regionNameChar = regionName[2].toUpperCase();
   if ('ABCD'.includes(regionNameChar)) {
     return 'store-icon-1';
@@ -32,8 +32,8 @@ export const Mayors = ({ names }) => {
   return names.map((name, idx) => {
     if (idx > 3) return undefined;
     return (
-      <span className='mayor' key={idx}>
-        <Link to={`/search/players/${name}`} className='link weight-bold'>
+      <span className="mayor" key={idx}>
+        <Link to={`/search/players/${name}`} className="link weight-bold">
           {name}
         </Link>
         {names.length >= 4 && idx === 3 && `... (${names.length - 3} more)`}
@@ -51,7 +51,7 @@ export const RegionDescription = ({
   server,
 }) => {
   return (
-    <span className='ml-80 block pb-4 txt-sm'>
+    <span className="ml-80 block pb-4 txt-sm">
       {name} is a {active ? 'shop' : 'town'} on {server} with{' '}
       {numMayors === 0 ? 'no' : numMayors}{' '}
       {numMayors === 1 ? 'mayor' : 'mayors'} and{' '}
@@ -64,11 +64,11 @@ export const RegionDescription = ({
 export const RegionInfo = ({ name, server, mayors }) => {
   return (
     <div>
-      <Link to={`/search/regions/${server}/${name}`} className='link-no-color'>
-        <span className='block txt-sm weight-bold pb-1'>{name}</span>
+      <Link to={`/search/regions/${server}/${name}`} className="link-no-color">
+        <span className="block txt-sm weight-bold pb-1">{name}</span>
       </Link>
 
-      <span className='block txt-sm weight-lite'>
+      <span className="block txt-sm weight-lite">
         Mayors: <Mayors names={mayors} />
       </span>
     </div>
@@ -77,11 +77,11 @@ export const RegionInfo = ({ name, server, mayors }) => {
 
 export const Region = ({ region }) => {
   return (
-    <div className='region background-dark p-5 mt-3 mb-3'>
-      <div className='flex'>
+    <div className="region background-dark p-5 mt-3 mb-3">
+      <div className="flex">
         <Link to={`/search/regions/${region.name}`}>
           <StoreIcon
-            fontSize='inherit'
+            fontSize="inherit"
             className={getBackgroundColor(region.name)}
           />
         </Link>
@@ -99,9 +99,9 @@ export const Region = ({ region }) => {
         server={region.server}
       />
       <CopyButton
-        text='Copy Warp'
+        text="Copy Warp"
         copyText={`/warp ${region.name}`}
-        className='ml-80 mt-2 txt-xs button-primary'
+        className="ml-80 mt-2 txt-xs button-primary"
       />
     </div>
   );

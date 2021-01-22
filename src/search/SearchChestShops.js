@@ -10,7 +10,6 @@ import {
   setHideOutOfStock,
   setSortBy,
   setHideFull,
-  getSortBy,
 } from '../state/chestShopsSlice';
 import { Filter, TradeTypeFilter, ServerFilter } from '../shared/filters';
 import { Select } from '../shared/select';
@@ -29,10 +28,10 @@ const SearchChestShops = () => {
   ];
 
   return (
-    <section id='chest-shops' className='background vh-100 pt-50'>
-      <div className='container flex'>
-        <div id='filters'>
-          <h3 className='color-white weight-bold txt-sm'>Filters</h3>
+    <section id="chest-shops" className="background vh-100 pt-50">
+      <div className="container flex">
+        <div id="filters">
+          <h3 className="color-white weight-bold txt-sm">Filters</h3>
           <TradeTypeFilter
             value={options.tradeType}
             setValue={(e) => dispatch(setTradeType(e.target.value))}
@@ -43,7 +42,7 @@ const SearchChestShops = () => {
           />
 
           {options.tradeType === 'buy' ? (
-            <Filter title='Options'>
+            <Filter title="Options">
               <FormControlLabel
                 control={
                   <Checkbox
@@ -53,11 +52,11 @@ const SearchChestShops = () => {
                     }
                   />
                 }
-                label='Hide Out of Stock Shops'
+                label="Hide Out of Stock Shops"
               />
             </Filter>
           ) : (
-            <Filter title='Options'>
+            <Filter title="Options">
               <FormControlLabel
                 control={
                   <Checkbox
@@ -65,15 +64,15 @@ const SearchChestShops = () => {
                     onChange={(e) => dispatch(setHideFull(e.target.checked))}
                   />
                 }
-                label='Hide Full Shops'
+                label="Hide Full Shops"
               />
             </Filter>
           )}
 
           {options.tradeType === 'buy' && (
-            <Filter title='Sort By'>
+            <Filter title="Sort By">
               <Select
-                className='sort-by-selector'
+                className="sort-by-selector"
                 value={options.sortBy}
                 setValue={(e) => dispatch(setSortBy(e))}
                 options={sortByOptions}

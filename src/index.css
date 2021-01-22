@@ -272,6 +272,10 @@ body {
   margin-bottom: 25px;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .pt-50 {
   padding-top: 50px;
 }
@@ -340,6 +344,10 @@ body {
 
 .weight-bold {
   font-weight: 500;
+}
+
+.italic {
+  font-style: italic;
 }
 
 /* Line-height */

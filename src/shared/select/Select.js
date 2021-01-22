@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactSelect from 'react-select';
 import { FixedSizeList } from 'react-window';
 

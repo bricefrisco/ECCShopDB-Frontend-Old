@@ -39,19 +39,19 @@ const Regions = () => {
   }, [options, dispatch]);
 
   return (
-    <div className='w-100'>
-      <div className='flex flex-between flex-center'>
+    <div className="w-100">
+      <div id="results-top-panel" className="flex flex-between flex-center">
         <TopPagination
           page={options.page}
           setPage={(e, page) => dispatch(setPage(page + 1))}
           count={totalResults}
-          labelTextEnd='regions.'
+          labelTextEnd="regions."
           loading={loading}
         />
 
         <Select
-          className='name-selector'
-          placeHolder='Region Name...'
+          className="name-selector"
+          placeHolder="Region Name..."
           onFocus={() => dispatch(fetchRegionNames())}
           value={options.name}
           setValue={(e, v) => dispatch(setName(e))}
@@ -62,12 +62,12 @@ const Regions = () => {
         />
       </div>
 
-      {loading && <Loading className='mt-5' />}
+      {loading && <Loading className="mt-5" />}
 
       {error && (
         <AlertError
           errorMessage={errorMessage}
-          className='mt-3'
+          className="mt-3"
           retry={() => dispatch(fetchRegions())}
         />
       )}

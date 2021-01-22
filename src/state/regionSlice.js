@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { parseResponse } from '../api';
 
-export const playerSlice = createSlice({
-  name: 'player',
+export const regionSlice = createSlice({
+  name: 'region',
 
   initialState: {
     info: undefined,
@@ -10,7 +10,7 @@ export const playerSlice = createSlice({
     error: false,
     errorMessage: undefined,
 
-    regions: {
+    players: {
       loading: false,
       error: false,
       errorMessage: undefined,
@@ -50,26 +50,26 @@ export const playerSlice = createSlice({
       state.errorMessage = action.payload;
     },
 
-    regionsLoading: (state) => {
-      state.regions.loading = true;
-      state.regions.error = false;
-      state.regions.results = [];
-      state.regions.totalResults = 0;
-      state.regions.totalPages = 0;
+    playersLoading: (state) => {
+      state.players.loading = true;
+      state.players.error = false;
+      state.players.results = [];
+      state.players.totalResults = 0;
+      state.players.totalPages = 0;
     },
 
-    regionsLoaded: (state, action) => {
-      state.regions.loading = false;
-      state.regions.error = false;
-      state.regions.results = action.payload.results;
-      state.regions.totalResults = action.payload.totalResults;
-      state.regions.totalPages = action.payload.totalPages;
+    playersLoaded: (state, action) => {
+      state.players.loading = false;
+      state.players.error = false;
+      state.players.results = action.payload.results;
+      state.players.totalResults = action.payload.totalResults;
+      state.players.totalPages = action.payload.totalPages;
     },
 
-    regionsErrored: (state, action) => {
-      state.regions.loading = false;
-      state.regions.error = true;
-      state.regions.errorMessage = action.payload;
+    playersErrored: (state, action) => {
+      state.players.loading = false;
+      state.players.error = true;
+      state.players.errorMessage = action.payload;
     },
 
     chestShopsLoading: (state) => {
@@ -94,12 +94,12 @@ export const playerSlice = createSlice({
       state.chestShops.errorMessage = action.payload;
     },
 
-    setRegionsPage: (state, action) => {
-      state.regions.page = action.payload;
+    setPlayersPage: (state, action) => {
+      state.players.page = action.payload;
     },
 
-    resetRegionsPage: (state) => {
-      state.regions.page = 1;
+    resetPlayersPage: (state) => {
+      state.players.page = 1;
     },
 
     setChestShopsPage: (state, action) => {
@@ -116,29 +116,32 @@ export const {
   loading,
   loaded,
   errored,
+  playersLoading,
+  playersLoaded,
+  playersErrored,
   regionsLoading,
   regionsLoaded,
   regionsErrored,
   chestShopsLoading,
   chestShopsLoaded,
   chestShopsErrored,
-  setRegionsPage,
-  resetRegionsPage,
+  setPlayersPage,
+  resetPlayersPage,
   setChestShopsPage,
   resetChestShopsPage,
-} = playerSlice.actions;
+} = regionSlice.actions;
 
-export const getPlayer = (state) => state.player.info;
-export const getLoading = (state) => state.player.loading;
-export const getError = (state) => state.player.error;
-export const getErrorMessage = (state) => state.player.errorMessage;
-export const getPlayerRegions = (state) => state.player.regions;
-export const getPlayerChestShops = (state) => state.player.chestShops;
+export const getRegion = (state) => state.region.info;
+export const getLoading = (state) => state.region.loading;
+export const getError = (state) => state.region.error;
+export const getErrorMessage = (state) => state.region.errorMessage;
+export const getRegionPlayers = (state) => state.region.players;
+export const getRegionChestShops = (state) => state.region.chestShops;
 
-export const fetchPlayer = (name) => (dispatch) => {
+export const fetchRegion = (name, server) => (dispatch) => {
   dispatch(loading());
 
-  fetch(`${process.env.REACT_APP_BACKEND}/players/${name}`)
+  fetch(`${process.env.REACT_APP_BACKEND}/regions/${server}/${name}`)
     .then(parseResponse)
     .then((response) => {
       dispatch(loaded(response));
@@ -154,18 +157,18 @@ export const fetchPlayer = (name) => (dispatch) => {
     });
 };
 
-export const fetchPlayerRegions = (name) => (dispatch, getState) => {
-  const page = getState().player.regions.page;
+export const fetchRegionPlayers = (name, server) => (dispatch, getState) => {
+  const page = getState().region.players.page;
 
-  dispatch(regionsLoading());
+  dispatch(playersLoading());
 
   fetch(
-    `${process.env.REACT_APP_BACKEND}/regions?page=${page}&mayorName=${name}`
+    `${process.env.REACT_APP_BACKEND}/players?server=${server}&regionName=${name}&page=${page}`
   )
     .then(parseResponse)
     .then((response) => {
       dispatch(
-        regionsLoaded({
+        playersLoaded({
           results: response.results,
           totalResults: response.totalElements,
           totalPages: response.totalPages,
@@ -174,7 +177,7 @@ export const fetchPlayerRegions = (name) => (dispatch, getState) => {
     })
     .catch((err) => {
       dispatch(
-        regionsErrored(
+        playersErrored(
           err === null || err === undefined
             ? 'Unknown error occurred'
             : err.toString()
@@ -183,16 +186,16 @@ export const fetchPlayerRegions = (name) => (dispatch, getState) => {
     });
 };
 
-export const fetchPlayerChestShops = (name, tradeType) => (
+export const fetchRegionChestShops = (name, server, tradeType) => (
   dispatch,
   getState
 ) => {
-  const page = getState().player.chestShops.page;
+  const page = getState().region.chestShops.page;
 
   dispatch(chestShopsLoading());
 
   fetch(
-    `${process.env.REACT_APP_BACKEND}/chest-shops?page=${page}&tradeType=${tradeType}&playerName=${name}`
+    `${process.env.REACT_APP_BACKEND}/chest-shops?page=${page}&tradeType=${tradeType}&regionName=${name}&server=${server}`
   )
     .then(parseResponse)
     .then((response) => {
@@ -215,4 +218,4 @@ export const fetchPlayerChestShops = (name, tradeType) => (
     });
 };
 
-export default playerSlice.reducer;
+export default regionSlice.reducer;
