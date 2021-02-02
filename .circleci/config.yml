@@ -4,10 +4,10 @@ workflows:
   version: 2
   main:
     jobs:
-      - build_test:
-          filters:
-            branches:
-              only: test
+      # - build_test:
+      #     filters:
+      #       branches:
+      #         only: test
 
       - build:
           filters:
@@ -37,7 +37,7 @@ jobs:
 
       - run:
           name: Deploy to server
-          command: scp -o StrictHostKeyChecking=no -r /home/circleci/application/build/* root@$TEST_HOST:/var/www/html
+          command: scp -o StrictHostKeyChecking=no -r /home/circleci/application/build/* $TEST_HOST:/var/www/html
 
   build:
     docker:
