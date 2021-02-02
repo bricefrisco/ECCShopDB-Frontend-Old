@@ -6,6 +6,10 @@ import { CopyButton } from '../copy-button';
 import './region.css';
 
 export const getBackgroundColor = (regionName) => {
+  if (regionName.length < 3) {
+    return 'store-icon-1';
+  }
+
   const regionNameChar = regionName[2].toUpperCase();
   if ('ABCD'.includes(regionNameChar)) {
     return 'store-icon-1';

@@ -4,10 +4,10 @@ workflows:
   version: 2
   main:
     jobs:
-      - build_test:
-          filters:
-            branches:
-              only: test
+      # - build_test:
+      #     filters:
+      #       branches:
+      #         only: test
 
       - build:
           filters:
