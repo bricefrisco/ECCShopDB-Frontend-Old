@@ -10,6 +10,7 @@ export const chestShopsSlice = createSlice({
       server: 'all',
       hideOutOfStock: true,
       hideFull: true,
+      hideDistinct: true,
       sortBy: { value: 'best-price', label: 'Best Price' },
       material: undefined,
       page: 1,
@@ -32,6 +33,9 @@ export const chestShopsSlice = createSlice({
     setTradeType: (state, action) => {
       state.options.tradeType = action.payload;
       state.options.page = 1;
+      if (action.payload === 'sell') {
+        state.options.sortBy = { value: 'best-price', label: 'Best Price'};
+      }
     },
     setServer: (state, action) => {
       state.options.server = action.payload;
@@ -51,6 +55,10 @@ export const chestShopsSlice = createSlice({
     },
     setMaterial: (state, action) => {
       state.options.material = action.payload;
+      state.options.page = 1;
+    },
+    setHideDistinct: (state, action) => {
+      state.options.hideDistinct = action.payload;
       state.options.page = 1;
     },
 
@@ -109,6 +117,7 @@ export const {
   setHideFull,
   setSortBy,
   setMaterial,
+  setHideDistinct,
   setPage,
   loading,
   loaded,
@@ -140,11 +149,15 @@ export const fetchChestShops = () => (dispatch, getState) => {
   }
 
   if (options.hideOutOfStock && options.tradeType === 'buy') {
-    url.searchParams.append('hideOutOfStock', true);
+    url.searchParams.append('hideOutOfStock', 'true');
   }
 
-  if (options.hideFullShops && options.tradeType === 'sell') {
-    url.searchParams.append('hideFull', true);
+  if (options.hideDistinct) {
+    url.searchParams.append('distinct', 'true');
+  }
+
+  if (options.hideFull && options.tradeType === 'sell') {
+    url.searchParams.append('hideFull', 'true');
   }
 
   if (options.material) {

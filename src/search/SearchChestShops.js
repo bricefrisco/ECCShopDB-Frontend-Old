@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -9,10 +9,10 @@ import {
   setServer,
   setHideOutOfStock,
   setSortBy,
-  setHideFull,
+  setHideFull, setHideDistinct,
 } from '../state/chestShopsSlice';
-import { Filter, TradeTypeFilter, ServerFilter } from '../shared/filters';
-import { Select } from '../shared/select';
+import {Filter, TradeTypeFilter, ServerFilter} from '../shared/filters';
+import {Select} from '../shared/select';
 import ChestShops from './ChestShops';
 
 import './search.css';
@@ -21,11 +21,16 @@ const SearchChestShops = () => {
   const dispatch = useDispatch();
   const options = useSelector(getOptions);
 
-  const sortByOptions = [
-    { value: 'best-price', label: 'Best Price' },
-    { value: 'quantity', label: 'Quantity' },
-    { value: 'quantity-available', label: 'Quantity Available' },
+  const sortByOptionsBuy = [
+    {value: 'best-price', label: 'Best Price'},
+    {value: 'quantity', label: 'Quantity'},
+    {value: 'quantity-available', label: 'Quantity Available'},
   ];
+
+  const sortByOptionsSell = [
+    {value: 'best-price', label: 'Best Price'},
+    {value: 'quantity', label: 'Quantity'},
+  ]
 
   return (
     <section id="chest-shops" className="background vh-100 pt-50">
@@ -41,8 +46,8 @@ const SearchChestShops = () => {
             setValue={(e) => dispatch(setServer(e.target.value))}
           />
 
-          {options.tradeType === 'buy' ? (
-            <Filter title="Options">
+          <Filter title='Options'>
+            {options.tradeType === 'buy' ? (
               <FormControlLabel
                 control={
                   <Checkbox
@@ -54,9 +59,7 @@ const SearchChestShops = () => {
                 }
                 label="Hide Out of Stock Shops"
               />
-            </Filter>
-          ) : (
-            <Filter title="Options">
+            ) : (
               <FormControlLabel
                 control={
                   <Checkbox
@@ -66,23 +69,26 @@ const SearchChestShops = () => {
                 }
                 label="Hide Full Shops"
               />
-            </Filter>
-          )}
+            )}
 
-          {options.tradeType === 'buy' && (
-            <Filter title="Sort By">
-              <Select
-                className="sort-by-selector"
-                value={options.sortBy}
-                setValue={(e) => dispatch(setSortBy(e))}
-                options={sortByOptions}
-                isSearchable={false}
-              />
-            </Filter>
-          )}
+            <FormControlLabel
+              control={<Checkbox checked={options.hideDistinct} onChange={(e) => dispatch(setHideDistinct(e.target.checked))}/>}
+              label='Hide Identical Shops'/>
+
+          </Filter>
+
+          <Filter title="Sort By">
+            <Select
+              className="sort-by-selector"
+              value={options.sortBy}
+              setValue={(e) => dispatch(setSortBy(e))}
+              options={options.tradeType === 'buy' ? sortByOptionsBuy : sortByOptionsSell}
+              isSearchable={false}
+            />
+          </Filter>
         </div>
 
-        <ChestShops />
+        <ChestShops/>
       </div>
     </section>
   );
