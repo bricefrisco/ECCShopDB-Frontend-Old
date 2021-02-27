@@ -85,7 +85,7 @@ export const TopPagination = ({
         count={count}
         page={page - 1}
         onChangePage={setPage}
-        rowsPerPage={10}
+        rowsPerPage={6}
         rowsPerPageOptions={[10]}
         labelDisplayedRows={({ from, to, count }) =>
           `${from} - ${to} of ${count} ${labelTextEnd}`

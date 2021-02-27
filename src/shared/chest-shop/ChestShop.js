@@ -103,11 +103,11 @@ export const ChestShop = ({ chestShop, tradeType }) => {
           tradeType={tradeType}
           quantity={chestShop.quantity}
           item={chestShop.material}
-          count={chestShop.count}
+          count={chestShop.quantityAvailable}
           price={tradeType === 'buy' ? chestShop.buyPrice : chestShop.sellPrice}
           player={chestShop.owner.name}
           region={chestShop.town.name}
-          server={chestShop.town.server}
+          server={chestShop.server}
           isFull={chestShop.full}
         />
       </div>
