@@ -154,11 +154,12 @@ export const fetchRegionNames = () => (dispatch, getState) => {
 
   dispatch(loadingNames());
 
-  fetch(
-    `${process.env.REACT_APP_BACKEND}/regions/region-names?server=${
-      options.server === 'all' ? '' : options.server
-    }&active=${options.hideNonShopTowns}`
-  )
+  const url = new URL(`${process.env.REACT_APP_BACKEND}/regions/region-names`);
+
+  if (options.server !== 'all') url.searchParams.append('server', options.server);
+  url.searchParams.append('active', options.hideNonShopTowns);
+
+  fetch(url)
     .then(parseResponse)
     .then((response) => {
       dispatch(
