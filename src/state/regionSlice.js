@@ -163,7 +163,7 @@ export const fetchRegionPlayers = (name, server) => (dispatch, getState) => {
   dispatch(playersLoading());
 
   fetch(
-    `${process.env.REACT_APP_BACKEND}/players?server=${server}&regionName=${name}&page=${page}`
+    `${process.env.REACT_APP_BACKEND}/regions/${server}/${name}/players?page=${page}`
   )
     .then(parseResponse)
     .then((response) => {
@@ -195,7 +195,7 @@ export const fetchRegionChestShops = (name, server, tradeType) => (
   dispatch(chestShopsLoading());
 
   fetch(
-    `${process.env.REACT_APP_BACKEND}/chest-shops?page=${page}&tradeType=${tradeType}&regionName=${name}&server=${server}`
+    `${process.env.REACT_APP_BACKEND}/regions/${server}/${name}/chest-shops?page=${page}&tradeType=${tradeType}`
   )
     .then(parseResponse)
     .then((response) => {

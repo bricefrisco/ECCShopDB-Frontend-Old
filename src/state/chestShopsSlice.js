@@ -149,15 +149,15 @@ export const fetchChestShops = () => (dispatch, getState) => {
   }
 
   if (options.hideOutOfStock && options.tradeType === 'buy') {
-    url.searchParams.append('hideOutOfStock', 'true');
+    url.searchParams.append('hideUnavailable', 'true');
+  }
+
+  if (options.hideFull && options.tradeType === 'sell') {
+    url.searchParams.append('hideUnavailable', 'true');
   }
 
   if (options.hideDistinct) {
     url.searchParams.append('distinct', 'true');
-  }
-
-  if (options.hideFull && options.tradeType === 'sell') {
-    url.searchParams.append('hideFull', 'true');
   }
 
   if (options.material) {
@@ -193,11 +193,12 @@ export const fetchMaterials = () => (dispatch, getState) => {
 
   dispatch(loadingMaterials());
 
-  fetch(
-    `${process.env.REACT_APP_BACKEND}/chest-shops/material-names?server=${
-      options.server === 'all' ? '' : options.server
-    }&tradeType=${options.tradeType}`
-  )
+  const url = new URL(`${process.env.REACT_APP_BACKEND}/chest-shops/material-names`)
+
+  if (options.server !== 'all') url.searchParams.append('server', options.server);
+  url.searchParams.append('tradeType', options.tradeType)
+
+  fetch(url)
     .then(parseResponse)
     .then((response) => {
       dispatch(

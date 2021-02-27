@@ -92,7 +92,7 @@ export const Region = ({ region }) => {
         <RegionInfo
           name={region.name}
           server={region.server}
-          mayors={region.mayors}
+          mayors={region.mayors.map(m => m.name)}
         />
       </div>
       <RegionDescription

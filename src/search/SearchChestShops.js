@@ -57,7 +57,7 @@ const SearchChestShops = () => {
                     }
                   />
                 }
-                label="Hide Out of Stock Shops"
+                label="Hide Unavailable Shops"
               />
             ) : (
               <FormControlLabel
@@ -67,13 +67,13 @@ const SearchChestShops = () => {
                     onChange={(e) => dispatch(setHideFull(e.target.checked))}
                   />
                 }
-                label="Hide Full Shops"
+                label="Hide Unavailable Shops"
               />
             )}
 
             <FormControlLabel
               control={<Checkbox checked={options.hideDistinct} onChange={(e) => dispatch(setHideDistinct(e.target.checked))}/>}
-              label='Hide Identical Shops'/>
+              label='Unique Shops Only'/>
 
           </Filter>
 

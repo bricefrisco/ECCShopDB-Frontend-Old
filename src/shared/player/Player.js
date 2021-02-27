@@ -12,16 +12,13 @@ export const Towns = ({ towns }) => {
   return towns.map((town, idx) => {
     if (idx > 3) return undefined;
 
-    const townName = town.split('|')[1].replace('_', '-').toLowerCase();
-    const server = town.split('|')[0].toLowerCase();
-
     return (
       <span className='towns' key={idx}>
         <Link
-          to={`/search/regions/${server}/${townName}`}
+          to={`/search/regions/${town.server}/${town.name}`}
           className='link weight-bold'
         >
-          {townName}
+          {town.name}
         </Link>
         {towns.length >= 4 && idx === 3 && `... (${towns.length - 3} more)`}
         {idx !== 3 && towns.length - 1 !== idx && ', '}
