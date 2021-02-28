@@ -96,7 +96,7 @@ export const ChestShop = ({ chestShop, tradeType }) => {
       <div className="flex">
         <img
           className="mc-avatar mr-3"
-          src={`https://minotar.net/avatar/${chestShop.owner.name}/60`}
+          src={`https://mc-heads.net/avatar/${chestShop.owner.name}/60`}
           alt="Avatar"
         />
         <ShopInfo

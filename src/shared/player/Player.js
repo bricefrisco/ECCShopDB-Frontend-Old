@@ -72,7 +72,7 @@ export const Player = ({ player }) => {
           <Link to={`/search/players/${player.name}`}>
             <img
               className='mc-avatar mr-3'
-              src={`https://minotar.net/avatar/${player.name}/60`}
+              src={`https://mc-heads.net/avatar/${player.name}/60`}
               alt='Avatar'
             />
           </Link>
