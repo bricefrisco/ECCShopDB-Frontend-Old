@@ -27,20 +27,18 @@ export const Towns = ({ towns }) => {
   });
 };
 
-export const PlayerDescription = ({ name, numChestShops, lastSeen }) => {
+export const PlayerDescription = ({ name, numChestShops, numTowns }) => {
   return (
-    <span className='ml-80 block pt-3 txt-sm'>
+    <span className='ml-80 block txt-sm'>
       {name}{' '}
-      {lastSeen
-        ? `was last seen ${lastSeen} and`
-        : ' has been offline awhile and '}{' '}
+      has {numTowns === undefined || numTowns === 0 ? 'no' : numTowns} towns and{' '}
       owns {numChestShops === 0 ? 'no' : numChestShops}{' '}
       {numChestShops === 1 ? 'chest shop.' : 'chest shops.'}
     </span>
   );
 };
 
-export const PlayerInfo = ({ name, towns, active }) => {
+export const PlayerInfo = ({ name, towns }) => {
   return (
     <div>
       <Link to={`/search/players/${name}`} className='link-no-color'>
@@ -50,16 +48,6 @@ export const PlayerInfo = ({ name, towns, active }) => {
       <span className='block txt-sm weight-lite'>
         Towns: <Towns towns={towns} />
       </span>
-
-      {active ? (
-        <span className='block txt-xs weight-bold color-primary mt-1'>
-          Active
-        </span>
-      ) : (
-        <span className='block txt-xs weight-bold color-error mt-1'>
-          Inactive
-        </span>
-      )}
     </div>
   );
 };
@@ -82,18 +70,12 @@ export const Player = ({ player }) => {
             active={player.active}
           />
         </div>
-
-        {player.lastUpdated && (
-          <span className='last-updated txt-xs'>
-            Last updated {getTimeFromNow(player.lastUpdated)}
-          </span>
-        )}
       </div>
 
       <PlayerDescription
-        lastSeen={player.lastSeen && getTimeFromNow(player.lastSeen)}
         name={player.name}
         numChestShops={player.numChestShops}
+        numTowns={player.towns.size}
       />
     </div>
   );

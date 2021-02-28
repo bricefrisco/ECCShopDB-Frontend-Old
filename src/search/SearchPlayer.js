@@ -60,7 +60,7 @@ const LastUpdated = ({ lastUpdated }) => {
   );
 };
 
-const PlayerInfo = ({ name, lastSeen, numTowns, numChestShops }) => {
+const PlayerInfo = ({ name, numTowns, numChestShops }) => {
   return (
     <div className="pt-50 pb-50 background flex">
       <img
@@ -71,11 +71,6 @@ const PlayerInfo = ({ name, lastSeen, numTowns, numChestShops }) => {
 
       <div className="pl-1">
         <h2 className="txt-md weight-lite pb-1">{name}</h2>
-        <p className="pb-2 weight-lite">
-          {lastSeen
-            ? `Last seen ${getTimeFromNow(lastSeen)}.`
-            : "Hasn't played in quite some time."}
-        </p>
         <p className="pb-1">
           Owns{' '}
           <span className="weight-bold">
@@ -206,7 +201,6 @@ const SearchPlayer = () => {
           {player && (
             <PlayerInfo
               name={player.name}
-              lastSeen={player.lastSeen}
               numChestShops={player.numChestShops}
               numTowns={player.towns.length}
             />
