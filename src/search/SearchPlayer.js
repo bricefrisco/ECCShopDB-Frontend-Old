@@ -65,7 +65,7 @@ const PlayerInfo = ({ name, lastSeen, numTowns, numChestShops }) => {
     <div className="pt-50 pb-50 background flex">
       <img
         className="icon-lg mc-avatar mr-4"
-        src={`https://minotar.net/avatar/${name}/100`}
+        src={`https://mc-heads.net/avatar/${name}/100`}
         alt="Avatar"
       />
 
