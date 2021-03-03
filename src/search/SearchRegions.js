@@ -7,14 +7,22 @@ import {
   getOptions,
   setServer,
   setHideNonShopTowns,
+  setSortBy
 } from '../state/regionsSlice';
 
 import { Filter, ServerFilter } from '../shared/filters';
 import Regions from './Regions';
+import {Select} from "../shared/select";
 
 const SearchRegions = () => {
   const dispatch = useDispatch();
   const options = useSelector(getOptions);
+
+  const sortByOptions = [
+    { value: 'name', label: 'Name' },
+    { value: 'num-chest-shops', label: 'Chest Shop Count'},
+    { value: 'num-players', label: 'Mayor Count'}
+  ]
 
   return (
     <section id='regions' className='background vh-100 pt-50'>
@@ -37,6 +45,16 @@ const SearchRegions = () => {
                 />
               }
               label='Hide Non-Shop Towns'
+            />
+          </Filter>
+
+          <Filter title="Sort By">
+            <Select
+              className="sort-by-selector"
+              value={options.sortBy}
+              setValue={(e) => dispatch(setSortBy(e))}
+              options={sortByOptions}
+              isSearchable={false}
             />
           </Filter>
         </div>

@@ -7,8 +7,8 @@ export const playersSlice = createSlice({
   initialState: {
     options: {
       name: undefined,
-      hideInactivePlayers: true,
-      page: 1,
+      sortBy: { value: 'name', label: 'Name'},
+      page: 1
     },
     names: {
       loading: false,
@@ -30,8 +30,8 @@ export const playersSlice = createSlice({
       state.options.page = 1;
     },
 
-    setHideInactivePlayers: (state, action) => {
-      state.options.hideInactivePlayers = action.payload;
+    setSortBy: (state, action) => {
+      state.options.sortBy = action.payload;
       state.options.page = 1;
     },
 
@@ -85,8 +85,8 @@ export const playersSlice = createSlice({
 
 export const {
   setName,
-  setHideInactivePlayers,
   setPage,
+  setSortBy,
   loading,
   loaded,
   errored,
@@ -110,13 +110,11 @@ export const fetchPlayers = () => (dispatch, getState) => {
   const url = new URL(`${process.env.REACT_APP_BACKEND}/players`);
   url.searchParams.append('page', options.page);
 
-  if (options.hideInactivePlayers) {
-    url.searchParams.append('active', true);
-  }
-
   if (options.name) {
     url.searchParams.append('name', options.name.value);
   }
+
+  url.searchParams.append('sortBy', options.sortBy.value);
 
   dispatch(loading());
 
@@ -146,7 +144,7 @@ export const fetchPlayerNames = () => (dispatch, getState) => {
   const options = getState().players.options;
 
   fetch(
-    `${process.env.REACT_APP_BACKEND}/players/player-names?active=${options.hideInactivePlayers}`
+    `${process.env.REACT_APP_BACKEND}/players/player-names`
   )
     .then(parseResponse)
     .then((response) => {

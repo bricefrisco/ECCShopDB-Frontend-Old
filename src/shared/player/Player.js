@@ -75,7 +75,7 @@ export const Player = ({ player }) => {
       <PlayerDescription
         name={player.name}
         numChestShops={player.numChestShops}
-        numTowns={player.towns.size}
+        numTowns={player.towns.length}
       />
     </div>
   );
