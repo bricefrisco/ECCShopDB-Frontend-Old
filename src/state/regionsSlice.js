@@ -9,6 +9,7 @@ export const regionsSlice = createSlice({
       hideNonShopTowns: true,
       name: undefined,
       page: 1,
+      sortBy: { value: 'name', label: 'Name'}
     },
     loading: false,
     error: false,
@@ -35,6 +36,10 @@ export const regionsSlice = createSlice({
     },
     setHideNonShopTowns: (state, action) => {
       state.options.hideNonShopTowns = action.payload;
+      state.options.page = 1;
+    },
+    setSortBy: (state, action) => {
+      state.options.sortBy = action.payload;
       state.options.page = 1;
     },
     setPage: (state, action) => {
@@ -89,6 +94,7 @@ export const {
   setServer,
   setName,
   setHideNonShopTowns,
+  setSortBy,
   setPage,
   loading,
   loaded,
@@ -124,6 +130,8 @@ export const fetchRegions = () => (dispatch, getState) => {
   if (options.name) {
     url.searchParams.append('name', options.name.value);
   }
+
+  url.searchParams.append('sortBy', options.sortBy.value);
 
   dispatch(loading());
 
